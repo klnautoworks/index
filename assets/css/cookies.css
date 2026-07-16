@@ -1,0 +1,241 @@
+/* Utilidad */
+.hidden {
+  display: none !important;
+}
+
+/* Banner: encima de todo y clickeable */
+.cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2147483646;
+  background: #111;
+  color: #eee;
+  border-top: 1px solid #333;
+  pointer-events: auto;
+}
+.cookie-banner__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+.cookie-banner__text {
+  max-width: 720px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.cookie-banner__link {
+  color: #ff3b3b;
+  text-decoration: underline;
+}
+.cookie-banner__actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Botones */
+.btn {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #1b1b1b;
+  color: #fff;
+  cursor: pointer;
+}
+.btn--primary {
+  background: #e50914;
+  border-color: #e50914;
+}
+.btn--secondary {
+  background: #2a2a2a;
+}
+.btn--ghost {
+  background: transparent;
+}
+
+/* Modal: más arriba que cualquier overlay */
+.cookie-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  pointer-events: auto;
+}
+.cookie-modal__dialog {
+  width: 100%;
+  max-width: 640px;
+  background: #0f0f0f;
+  color: #eee;
+  border: 1px solid #333;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.cookie-modal__header,
+.cookie-modal__footer {
+  padding: 16px;
+  border-bottom: 1px solid #222;
+}
+.cookie-modal__footer {
+  border-top: 1px solid #222;
+  border-bottom: none;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.cookie-modal__body {
+  padding: 16px;
+}
+.cookie-modal__close {
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-size: 24px;
+  cursor: pointer;
+}
+.cookie-toggle {
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid #222;
+  border-radius: 10px;
+  background: #141414;
+}
+/* Utilidades */
+.hidden {
+  display: none;
+}
+
+/* Banner de cookies */
+.cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: #111;
+  color: #eee;
+  border-top: 1px solid #333;
+}
+.cookie-banner__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+.cookie-banner__text {
+  max-width: 720px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.cookie-banner__link {
+  color: #ff3b3b;
+  text-decoration: underline;
+}
+.cookie-banner__actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Botones */
+.btn {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #1b1b1b;
+  color: #fff;
+  cursor: pointer;
+}
+.btn--primary {
+  background: #e50914;
+  border-color: #e50914;
+}
+.btn--secondary {
+  background: #2a2a2a;
+}
+.btn--ghost {
+  background: transparent;
+}
+
+/* Modal */
+.cookie-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.cookie-modal__dialog {
+  width: 100%;
+  max-width: 640px;
+  background: #0f0f0f;
+  color: #eee;
+  border: 1px solid #333;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.cookie-modal__header,
+.cookie-modal__footer {
+  padding: 16px;
+  border-bottom: 1px solid #222;
+}
+.cookie-modal__footer {
+  border-top: 1px solid #222;
+  border-bottom: none;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.cookie-modal__body {
+  padding: 16px;
+}
+.cookie-modal__close {
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-size: 24px;
+  cursor: pointer;
+}
+.cookie-toggle {
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid #222;
+  border-radius: 10px;
+  background: #141414;
+}
+
+
+/* Legales (opcional, básico) */
+
+.page--legal .site-header h1 {
+  margin: 0 auto;
+  color: #090909;
+}
+.page--legal .container.legal {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #080808;
+}
+.site-footer nav a {
+  color: #ff3b3b;
+  text-decoration: none;
+  margin: 10px;
+  align-items: center;
+}
+.site-footer nav a:hover {
+  text-decoration: underline;
+}
