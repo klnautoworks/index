@@ -241,3 +241,14 @@ html.tow-modal-open { overflow: hidden; }
 .tow-cta .container { padding-left: 1rem; padding-right: 1rem; }
 .tow-reviews .section-title { margin-bottom: 1.2rem; }
 .tow-services-wrap { border-radius: var(--radius); }
+
+/* Schedule for later: calendar + day buttons + time list */
+.tow-when { display: grid; gap: .6rem; }
+.tow-when__quick { display: flex; gap: .5rem; flex-wrap: wrap; }
+.tow-pill { background: #121a26; color: var(--color-light); border: 1px solid rgba(255,255,255,.18); border-radius: 999px; padding: .5rem 1rem; font: inherit; font-size: .95rem; cursor: pointer; min-height: 44px; }
+.tow-pill:hover { border-color: var(--color-secondary); }
+.tow-pill.is-on { background: var(--color-secondary); border-color: var(--color-secondary); color: #fff; font-weight: 600; }
+.tow-when__row { display: grid; grid-template-columns: 1.3fr 1fr; gap: .6rem; }
+.tow-when__row input, .tow-when__row select { min-height: 48px; color-scheme: dark; cursor: pointer; }
+.tow-when__summary { color: var(--color-muted); font-size: .92rem; margin: 0; min-height: 1.2em; }
+@media (max-width: 420px) { .tow-when__row { grid-template-columns: 1fr; } }

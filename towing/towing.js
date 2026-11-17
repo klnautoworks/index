@@ -48,11 +48,73 @@
     service.addEventListener("change", syncService);
     syncService();
 
+    // ---- Schedule for later: calendar + quick day buttons + a time list (15-minute steps, no seconds)
+    var dateEl = form.elements["schedule_date"];
+    var timeEl = form.elements["schedule_time"];
+    var summary = form.querySelector("#tf-summary");
+    var quick = form.querySelectorAll("[data-day]");
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+    function isoDay(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+    function dayFromNow(n) { var d = new Date(); d.setDate(d.getDate() + n); return d; }
+    if (timeEl && timeEl.options.length < 2) {
+      for (var m = 0; m < 24 * 60; m += 15) {
+        var h = Math.floor(m / 60), mi = m % 60;
+        var o = document.createElement("option");
+        o.value = pad(h) + ":" + pad(mi);
+        o.textContent = ((h % 12) || 12) + ":" + pad(mi) + " " + (h < 12 ? "AM" : "PM");
+        timeEl.appendChild(o);
+      }
+    }
+    function setLimits() {
+      if (!dateEl) return;
+      dateEl.min = isoDay(new Date());
+      dateEl.max = isoDay(dayFromNow(180));
+    }
+    function syncSchedule() {
+      var d = dateEl ? dateEl.value : "", t = timeEl ? timeEl.value : "";
+      if (dateEl) dateEl.classList.remove("is-invalid");
+      if (timeEl) timeEl.classList.remove("is-invalid");
+      scheduleInput.value = d && t ? d + "T" + t : "";
+      Array.prototype.forEach.call(quick, function (b) {
+        var on = d && d === isoDay(dayFromNow(Number(b.getAttribute("data-day"))));
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+        b.classList.toggle("is-on", !!on);
+      });
+      if (summary) {
+        if (d && t) {
+          var when = new Date(d + "T" + t + ":00");
+          try {
+            summary.textContent = "We’ll plan for " + when.toLocaleDateString("en-CA", { weekday: "long", month: "long", day: "numeric" }) + " at " + timeEl.options[timeEl.selectedIndex].textContent + ".";
+          } catch (e) { summary.textContent = ""; }
+        } else {
+          summary.textContent = "";
+        }
+      }
+    }
+    if (dateEl) {
+      setLimits();
+      dateEl.addEventListener("change", syncSchedule);
+      dateEl.addEventListener("input", syncSchedule);
+      // open the calendar when the box is clicked (not only the small icon)
+      dateEl.addEventListener("click", function () { if (typeof dateEl.showPicker === "function") { try { dateEl.showPicker(); } catch (e) {} } });
+    }
+    if (timeEl) timeEl.addEventListener("change", syncSchedule);
+    Array.prototype.forEach.call(quick, function (b) {
+      b.addEventListener("click", function () {
+        setLimits();
+        dateEl.value = isoDay(dayFromNow(Number(b.getAttribute("data-day"))));
+        syncSchedule();
+        if (!timeEl.value) { try { timeEl.focus(); } catch (e) {} }
+      });
+    });
+    form.addEventListener("reset", function () { setTimeout(function () { setLimits(); syncSchedule(); }, 0); });
+
     form.querySelectorAll('input[name="when"]').forEach(function (r) {
       r.addEventListener("change", function () {
         var scheduled = form.elements["when"].value === "scheduled";
         scheduleBox.hidden = !scheduled;
-        scheduleInput.required = scheduled;
+        scheduleInput.required = false;
+        if (scheduled) setLimits();
       });
     });
 
@@ -89,7 +151,15 @@
       need(form.elements["vehicle"], "your vehicle");
       need(form.elements["pickup"], "where the vehicle is");
       if (dest.required) need(dest, "where we should take it");
-      if (scheduleInput.required) need(scheduleInput, "a preferred date and time");
+      if (form.elements["when"].value === "scheduled") {
+        var dv = dateEl.value, tv = timeEl.value;
+        if (!dv) { dateEl.classList.add("is-invalid"); problems.push("the date"); }
+        if (!tv) { timeEl.classList.add("is-invalid"); problems.push("the time"); }
+        if (dv && tv && new Date(dv + "T" + tv + ":00").getTime() < Date.now() - 60000) {
+          dateEl.classList.add("is-invalid"); timeEl.classList.add("is-invalid");
+          problems.push("a date and time that has not passed yet (for right now, choose “As soon as possible”)");
+        }
+      }
       var digits = (form.elements["phone"].value || "").replace(/\D/g, "");
       if (digits.length < 10) { form.elements["phone"].classList.add("is-invalid"); problems.push("a phone number with area code"); }
       var email = (form.elements["email"].value || "").trim();

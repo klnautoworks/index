@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="/assets/css/cookies.css" />
     <script src="/assets/js/cookies.js" defer></script>
     <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/towing/towing.css?v=20261117c" />
+    <link rel="stylesheet" href="/towing/towing.css?v=20261117d" />
 
   </head>
   <body>
@@ -497,8 +497,19 @@
                     </div>
                   </div>
                   <div class="tow-field" data-schedule hidden>
-                    <label for="tf-when">Preferred date and time</label>
-                    <input id="tf-when" name="scheduled_for" type="datetime-local" />
+                    <span class="tow-label" id="tf-when-label">Preferred date and time (Winnipeg time) *</span>
+                    <div class="tow-when" role="group" aria-labelledby="tf-when-label">
+                      <div class="tow-when__quick">
+                        <button type="button" class="tow-pill" data-day="0">Today</button>
+                        <button type="button" class="tow-pill" data-day="1">Tomorrow</button>
+                      </div>
+                      <div class="tow-when__row">
+                        <input id="tf-date" name="schedule_date" type="date" aria-label="Date" />
+                        <select id="tf-time" name="schedule_time" aria-label="Time"><option value="">Select time</option></select>
+                      </div>
+                      <p class="tow-when__summary" id="tf-summary" aria-live="polite"></p>
+                    </div>
+                    <input id="tf-when" name="scheduled_for" type="hidden" />
                   </div>
                   <div class="tow-field">
                     <span class="tow-label">Anything we should know? (check all that apply)</span>
@@ -540,7 +551,7 @@
       </div>
     </dialog>
 
-    <script src="/towing/config.js?v=20261117c"></script>
-    <script src="/towing/towing.js?v=20261117c"></script>
+    <script src="/towing/config.js?v=20261117d"></script>
+    <script src="/towing/towing.js?v=20261117d"></script>
   </body>
 </html>
