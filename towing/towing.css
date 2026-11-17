@@ -1,32 +1,20 @@
 /* KLN Towing — styles that sit on top of /style.css */
 
-/* ---------- Hero ---------- */
+/* ---------- Hero (same full-bleed photo style as the mechanic site) ---------- */
 .tow-hero {
-  min-height: 82vh;
-  background-image:
-    radial-gradient(900px 420px at 80% 45%, rgba(224, 32, 32, 0.18), transparent 65%),
-    linear-gradient(180deg, #0b0e1a, #0d1118);
-  background-size: auto;
-  background-position: center;
-  background-repeat: no-repeat;
+  min-height: 92vh;
+  background:
+    linear-gradient(90deg, rgba(8, 12, 20, 0.9) 0%, rgba(8, 12, 20, 0.62) 42%, rgba(8, 12, 20, 0.12) 100%),
+    var(--hero-bg) 68% center / cover no-repeat;
 }
-.tow-hero::after { display: none; }
-.tow-hero--short { min-height: 44vh; }
-/* Home hero: text on the left, picture on the right */
-.tow-hero--split { min-height: auto; display: block; padding: calc(var(--header-h) + 3rem) 1rem 4rem; }
-.tow-hero__inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 2.5rem; align-items: center; }
-.tow-hero__copy h1 { font-size: clamp(2rem, 3.4vw, 3rem); margin-bottom: 1rem; }
-.tow-hero__copy > p:not(.tow-eyebrow) { font-size: 1.15rem; margin-bottom: 1.6rem; }
-.tow-hero__media { margin: 0; }
-.tow-hero__media img {
-  width: 100%; height: auto; border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.1);
+.tow-hero .hero-content { max-width: 660px; }
+.tow-hero h1 { margin-bottom: 1rem; text-transform: uppercase; }
+.tow-hero--short { min-height: 56vh; }
+.tow-hero--short .hero-content { max-width: 720px; }
+@media (max-width: 768px) {
+  .tow-hero { background: linear-gradient(180deg, rgba(8,12,20,.8), rgba(8,12,20,.7)), var(--hero-bg) 62% center / cover no-repeat; min-height: 86vh; }
+  .tow-hero .tow-actions, .tow-hero .tow-chips { justify-content: center; }
 }
-@media (max-width: 900px) {
-  .tow-hero__inner { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
-}
-.tow-hero .hero-content { max-width: 720px; }
-.tow-hero h1 { margin-bottom: 1rem; }
 .tow-eyebrow {
   display: inline-flex; align-items: center; gap: .5rem;
   font-size: .85rem !important; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
@@ -67,7 +55,6 @@
 
 /* ---------- Sections ---------- */
 @media (min-width: 900px) { .tow-cols-3 { grid-template-columns: repeat(3, 1fr); } }
-.tow-alt { background: #0d1118; }
 .tow-note { text-align: center; color: var(--color-muted); font-size: .9rem; margin-top: 1.5rem; }
 .tow-h2 { font-size: var(--fs-700); color: var(--color-secondary); margin-bottom: .6rem; }
 .tow-lead { color: var(--color-muted); }
@@ -242,3 +229,15 @@ html.tow-modal-open { overflow: hidden; }
 .tow-lightbox { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 94vh; overflow: visible; margin: auto; }
 .tow-lightbox img { display: block; max-width: 96vw; max-height: 92vh; width: auto; height: auto; border-radius: 12px; box-shadow: 0 30px 80px rgba(0,0,0,.7); cursor: zoom-out; }
 .tow-lightbox .tow-modal__close { top: .6rem; right: .6rem; background: rgba(5,8,13,.7); }
+
+/* Numbers inside the round card icon (How It Works) */
+.card__icon .tow-num { font-family: var(--font-head); font-weight: 800; font-size: 1.9rem; line-height: 1; color: #fff; }
+
+/* Photo-background sections: two text panels / request card look like the mechanic "What We Do" container */
+.tow-panel { padding: .5rem 1rem; }
+.tow-request-cta { padding-top: 4rem; padding-bottom: 4rem; }
+.tow-request-card { background: none; border: 0; box-shadow: none; padding: 1rem; }
+.tow-cta { padding-top: 4rem; padding-bottom: 4rem; }
+.tow-cta .container { padding-left: 1rem; padding-right: 1rem; }
+.tow-reviews .section-title { margin-bottom: 1.2rem; }
+.tow-services-wrap { border-radius: var(--radius); }
