@@ -70,7 +70,7 @@
     <title>KLN AutoWorks – Mobile & On‑Demand Automotive Service</title>
     <meta
       name="description"
-      content="KLN AutoWorks provides professional mobile auto repair and maintenance in Winnipeg. Experienced mechanics come to you for brakes, suspension, diagnostics, oil changes, batteries, and roadside assistance."
+      content="KLN AutoWorks provides professional mobile auto repair and maintenance in Winnipeg. Experienced mechanics come to you for brakes, suspension, diagnostics, oil changes, batteries, roadside assistance and towing."
     />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -207,6 +207,10 @@
           },
           {
             "@type": "Offer",
+            "itemOffered": { "@type": "Service", "name": "Towing Service" }
+          },
+          {
+            "@type": "Offer",
             "itemOffered": { "@type": "Service", "name": "Brake Service" }
           },
           {
@@ -280,6 +284,7 @@
           </div>
 
           <a href="fleet.html">FLEET</a>
+          <a href="towing/" class="nav-tow">TOWING</a>
         </nav>
 
         <!-- CTA llamada -->
@@ -310,6 +315,24 @@
           repairs anywhere in Winnipeg.
         </p>
         <button class="cta-button open-booking">Book Now</button>
+      </div>
+    </section>
+
+
+    <!-- Towing cross-link banner -->
+    <section class="tow-banner" aria-label="KLN Towing">
+      <div class="container tow-banner__inner">
+        <div class="tow-banner__copy">
+          <i class="fa-solid fa-truck-pickup" aria-hidden="true"></i>
+          <div>
+            <strong>Need a tow? KLN Towing is available 24/7.</strong>
+            <span>Towing, winching and roadside help across Winnipeg and surrounding areas.</span>
+          </div>
+        </div>
+        <div class="tow-banner__actions">
+          <a class="btn btn--primary" href="towing/">Request a Tow</a>
+          <a class="btn btn--ghost" href="tel:+12048996955">Call 204-899-6955</a>
+        </div>
       </div>
     </section>
 
@@ -408,7 +431,7 @@
             <h3 class="card__title">We Come to You</h3>
             <p class="card__desc">
               Home, office, or roadside—our mobile setup brings tools and parts
-              to your location. No towing, no waiting rooms.
+              to your location. No waiting rooms—and if your vehicle can’t be repaired safely on site, our tow truck can take it to the shop.
             </p>
           </article>
         </div>
@@ -505,7 +528,7 @@
             </p>
             <div class="card__cta">
               <button class="btn btn--primary open-booking">Book Now</button>
-              <a href="services/diagnostics.html" class="btn btn--ghost"
+              <a href="services/suspension.html" class="btn btn--ghost"
                 >Learn More</a
               >
             </div>
@@ -520,8 +543,7 @@
             <h3 class="card__title">Roadside Assistance</h3>
 
             <p class="card__desc">
-              Emergency service for flat tires, jump starts, lockouts, or
-              towing. Fast help wherever you are in Winnipeg.
+              Emergency service for flat tires, jump starts, lockouts, towing and winching. Fast help wherever you are in Winnipeg and surrounding areas.
             </p>
 
             <div class="card__cta">
@@ -551,7 +573,7 @@
             </p>
             <div class="card__cta">
               <button class="btn btn--primary open-booking">Book Now</button>
-              <a href="services/diagnostics.html" class="btn btn--ghost"
+              <a href="services/tire-rotation.html" class="btn btn--ghost"
                 >Learn More</a
               >
             </div>
@@ -563,7 +585,7 @@
               <i class="fa-solid fa-clipboard-check"></i>
             </div>
             <h3 class="card__title">
-              <a href="services/diagnostics.html">Pre-Purchase Inspection</a>
+              <a href="services/used-car.html">Pre-Purchase Inspection</a>
             </h3>
             <p class="card__desc">
               Comprehensive on-site inspection with OBD scan and report. Buy
@@ -571,7 +593,7 @@
             </p>
             <div class="card__cta">
               <button class="btn btn--primary open-booking">Book Now</button>
-              <a href="services/diagnostics.html" class="btn btn--ghost"
+              <a href="services/used-car.html" class="btn btn--ghost"
                 >Learn More</a
               >
             </div>
@@ -617,8 +639,7 @@
           <div class="testimonial">
             <p>
               “The mechanic arrived on time, explained the issue clearly and
-              fixed my brakes faster than a shop could. No towing, no waiting
-              room—just great service.”
+              fixed my brakes faster than a shop could. No waiting room—just great service.”
             </p>
             <div class="author">— Sarah P., Winnipeg</div>
           </div>
@@ -879,6 +900,7 @@
               <li><a href="how-it-works.html">How It Works</a></li>
               <li><a href="services.html">Services</a></li>
               <li><a href="fleet.html">Fleet</a></li>
+              <li><a href="towing/">Towing</a></li>
               <li><a href="about.html">About Us</a></li>
             </ul>
           </nav>
@@ -904,8 +926,7 @@
                 8:00–18:00
               </li>
               <li>
-                <i class="fa-solid fa-ambulance" aria-hidden="true"></i> Road
-                Assistance 24/7
+                <i class="fa-solid fa-ambulance" aria-hidden="true"></i> Roadside &amp; Towing 24/7
               </li>
             </ul>
           </div>

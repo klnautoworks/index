@@ -23,6 +23,11 @@
   <url><loc>https://klnautoworks.ca/services/used-car.html</loc></url>
   <url><loc>https://klnautoworks.ca/services/roadside.html</loc></url>
 
+  <!-- Towing -->
+  <url><loc>https://klnautoworks.ca/towing/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://klnautoworks.ca/towing/services.html</loc></url>
+  <url><loc>https://klnautoworks.ca/towing/request.html</loc></url>
+
   <!-- Legales -->
   <url><loc>https://klnautoworks.ca/privacy-policy.html</loc></url>
   <url><loc>https://klnautoworks.ca/terms.html</loc></url>

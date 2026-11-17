@@ -1751,3 +1751,15 @@ footer a {
   color: #ff3b3b; text-decoration: none; margin-right: 8px;
 }
 .site-footer nav a:hover { text-decoration: underline; }
+
+/* ===== Towing cross-link (added Nov 2026) ===== */
+.nav-links a.nav-tow { color: var(--color-secondary); font-weight: 700; }
+.tow-banner { padding: 1.25rem 1rem; background: #11161f; border-top: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08); }
+.tow-banner__inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.tow-banner__copy { display: flex; align-items: center; gap: .9rem; }
+.tow-banner__copy > i { font-size: 1.8rem; color: var(--color-secondary); }
+.tow-banner__copy strong { display: block; font-family: var(--font-head); font-size: 1.05rem; }
+.tow-banner__copy span { color: var(--color-muted); font-size: .95rem; }
+.tow-banner__actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+.tow-banner .btn { display: inline-block; padding: .65rem 1.1rem; border-radius: var(--radius); }
+@media (max-width: 768px) { .tow-banner__inner { justify-content: center; text-align: center; } .tow-banner__copy { flex-direction: column; } }

@@ -51,9 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
       "Our services start at CAD $79 for basic diagnostics. Choose a service and vehicle in the booking form for an exact quote.",
     warranty:
       "We back our work with a 12 month/20,000 km warranty on parts and labour.",
-    area: "We serve Winnipeg, Manitoba and surrounding suburbs within a 40‑km radius.",
+    area: "Mobile repairs cover Winnipeg and surrounding suburbs within a 40‑km radius. Towing and roadside can travel farther — call 204-899-6955 for out-of-town requests.",
     hours:
-      "We operate 7 days a week, 8am–8pm. Emergency roadside assistance is available 24/7.",
+      "We operate 7 days a week, 8am–8pm. Towing and emergency roadside assistance are available 24/7.",
+    tow: "Our tow truck runs 24/7. Call 204-899-6955 or request a tow online at klnautoworks.ca/towing/.",
   };
 
   function addChatMessage(text, sender = "bot") {
