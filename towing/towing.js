@@ -5,8 +5,10 @@
 (function () {
   "use strict";
   var PHONE = "204-899-6955";
+  // Built-in default so the form still works if config.js is cached, blocked or loads late.
+  var DEFAULT_ENDPOINT = "https://kln-dispatch.pages.dev/api/public/tow-request";
   var cfg = window.KLN_TOW_CONFIG || {};
-  var endpoint = (cfg.endpoint || "").trim();
+  var endpoint = (cfg.endpoint === undefined ? DEFAULT_ENDPOINT : String(cfg.endpoint)).trim();
 
   document.querySelectorAll("[data-tow-form-wrap]").forEach(function (wrap) {
     var form = wrap.querySelector("form");
