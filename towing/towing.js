@@ -56,6 +56,20 @@
       });
     });
 
+    // Each time the pop-up opens: restart the "form opened" timer and clear a previous result
+    document.addEventListener("tow:opened", function () {
+      startedAt = Date.now();
+      errBox.hidden = true;
+      if (success && !success.hidden) {
+        success.hidden = true;
+        form.hidden = false;
+        form.reset();
+        scheduleBox.hidden = true;
+        scheduleInput.required = false;
+        syncService();
+      }
+    });
+
     form.addEventListener("input", function () { errBox.hidden = true; });
 
     function showError(msg) {
@@ -131,8 +145,8 @@
         if (!res.ok) throw new Error("HTTP " + res.status);
         form.hidden = true;
         success.hidden = false;
-        success.focus();
-        success.scrollIntoView({ block: "center", behavior: "smooth" });
+        try { success.focus({ preventScroll: true }); } catch (e) { success.focus(); }
+        if (!success.closest("#tow-modal")) { success.scrollIntoView({ block: "center", behavior: "smooth" }); }
       }).catch(function () {
         showError("We couldn’t send your request. Please call " + PHONE + " and we’ll get a truck on the way.");
       }).then(function () {
@@ -142,4 +156,56 @@
       });
     });
   });
+
+  // ---------- Request form pop-up ----------
+  var modal = document.getElementById("tow-modal");
+  if (modal) {
+    var openModal = function (svc) {
+      document.dispatchEvent(new CustomEvent("tow:opened"));
+      var f = modal.querySelector("form");
+      if (svc && f && f.elements["service"]) {
+        var sel = f.elements["service"];
+        var ok = Array.prototype.some.call(sel.options, function (o) { return o.value === svc; });
+        if (ok) { sel.value = svc; sel.dispatchEvent(new Event("change")); }
+      }
+      if (typeof modal.showModal === "function") { if (!modal.open) modal.showModal(); }
+      else { modal.setAttribute("open", ""); }
+      document.documentElement.classList.add("tow-modal-open");
+      var first = modal.querySelector("form:not([hidden]) input, .tow-success:not([hidden])");
+      if (first && first.focus) { try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); } }
+    };
+    var closeModal = function () {
+      if (typeof modal.close === "function") { if (modal.open) modal.close(); }
+      else { modal.removeAttribute("open"); }
+      document.documentElement.classList.remove("tow-modal-open");
+    };
+    modal.addEventListener("close", function () { document.documentElement.classList.remove("tow-modal-open"); });
+    modal.addEventListener("click", function (e) { if (e.target === modal) closeModal(); }); // click on the dark backdrop
+    modal.querySelectorAll("[data-tow-close]").forEach(function (b) { b.addEventListener("click", closeModal); });
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest ? e.target.closest('a[href="#request"], a[href$="request.html"], a[href*="request.html?"], [data-tow-open]') : null;
+      if (!a || e.defaultPrevented || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      if (a.closest("#tow-modal")) return;
+      e.preventDefault();
+      var svc = "";
+      try { svc = new URL(a.getAttribute("href") || "", window.location.href).searchParams.get("service") || ""; } catch (err) {}
+      openModal(svc);
+    });
+    if (window.location.hash === "#request") { openModal(""); }
+  }
+
+  // ---------- Photo viewer ----------
+  var box = document.getElementById("tow-lightbox");
+  if (box) {
+    var boxImg = box.querySelector("img");
+    var closeBox = function () { if (typeof box.close === "function") { if (box.open) box.close(); } else { box.removeAttribute("open"); } };
+    document.querySelectorAll("[data-lightbox]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        boxImg.src = b.getAttribute("data-lightbox");
+        boxImg.alt = b.getAttribute("data-alt") || "";
+        if (typeof box.showModal === "function") { if (!box.open) box.showModal(); } else { box.setAttribute("open", ""); }
+      });
+    });
+    box.addEventListener("click", closeBox);
+  }
 })();

@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="/assets/css/cookies.css" />
     <script src="/assets/js/cookies.js" defer></script>
     <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/towing/towing.css" />
+    <link rel="stylesheet" href="/towing/towing.css?v=20261117b" />
 
   </head>
   <body>
@@ -408,7 +408,139 @@
 
     
     <script src="/script.js"></script>
-    <script src="/towing/config.js"></script>
-    <script src="/towing/towing.js"></script>
+    <!-- Request form (opens when someone taps "Request a Tow") -->
+    <dialog id="tow-modal" class="tow-modal" aria-labelledby="tow-modal-title">
+      <div class="tow-modal__panel">
+        <button type="button" class="tow-modal__close" data-tow-close aria-label="Close the request form"><span aria-hidden="true">&times;</span></button>
+        <h2 id="tow-modal-title" class="tow-modal__title">Request a Tow</h2>
+        <p class="tow-modal__lead">Fill in the form and dispatch will call you to confirm. Prefer to talk? Call <a href="tel:+12048996955"><strong>204-899-6955</strong></a>.</p>
+          <div class="tow-form-wrap" data-tow-form-wrap>
+            <div class="tow-form-offline" hidden>
+              <h3><i class="fa-solid fa-phone-volume" aria-hidden="true"></i> Call us for the fastest help</h3>
+              <p>Online requests are coming soon. For now, call dispatch and we’ll get a truck on the way.</p>
+              <a class="cta-button" href="tel:+12048996955">Call 204-899-6955</a>
+            </div>
+
+            <form id="tow-form" class="tow-form" novalidate>
+              <div class="tow-grid">
+                <fieldset class="tow-fieldset">
+                  <legend>Your details</legend>
+                  <div class="tow-field">
+                    <label for="tf-name">Full name *</label>
+                    <input id="tf-name" name="name" type="text" autocomplete="name" required />
+                  </div>
+                  <div class="tow-field">
+                    <label for="tf-phone">Phone number *</label>
+                    <input id="tf-phone" name="phone" type="tel" autocomplete="tel" placeholder="(204) 555-0123" required />
+                  </div>
+                  <div class="tow-field">
+                    <label for="tf-email">Email (optional)</label>
+                    <input id="tf-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" />
+                  </div>
+                </fieldset>
+
+                <fieldset class="tow-fieldset">
+                  <legend>What do you need?</legend>
+                  <div class="tow-field">
+                    <label for="tf-service">Service *</label>
+                    <select id="tf-service" name="service" required>
+                      <option value="">Select a service</option>
+                      <option value="towing">Towing</option>
+                      <option value="winching">Winching / recovery (stuck vehicle)</option>
+                      <option value="jump-start">Jump-start</option>
+                      <option value="flat-tire">Flat tire change</option>
+                      <option value="lockout">Lockout</option>
+                      <option value="fuel">Fuel delivery</option>
+                      <option value="not-sure">Not sure</option>
+                    </select>
+                  </div>
+                  <div class="tow-field">
+                    <label for="tf-vehicle">Vehicle (year, make, model) *</label>
+                    <input id="tf-vehicle" name="vehicle" type="text" placeholder="2018 Toyota Camry" required />
+                  </div>
+                  <div class="tow-field tow-field--half">
+                    <div>
+                      <label for="tf-color">Color</label>
+                      <input id="tf-color" name="vehicle_color" type="text" placeholder="Silver" />
+                    </div>
+                    <div>
+                      <label for="tf-drive">Drive type</label>
+                      <select id="tf-drive" name="drivetrain">
+                        <option value="unknown">Not sure</option>
+                        <option value="fwd">Front-wheel drive</option>
+                        <option value="rwd">Rear-wheel drive</option>
+                        <option value="awd-4x4">AWD / 4x4</option>
+                      </select>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <fieldset class="tow-fieldset">
+                  <legend>Where?</legend>
+                  <div class="tow-field">
+                    <label for="tf-pickup">Where is the vehicle? *</label>
+                    <input id="tf-pickup" name="pickup" type="text" placeholder="Street address, intersection or landmark" required />
+                  </div>
+                  <div class="tow-field">
+                    <label for="tf-dest">Where should we take it? <span data-dest-hint>(required for towing)</span></label>
+                    <input id="tf-dest" name="destination" type="text" placeholder="Shop name, home address or city" />
+                  </div>
+                </fieldset>
+
+                <fieldset class="tow-fieldset">
+                  <legend>When and conditions</legend>
+                  <div class="tow-field">
+                    <span class="tow-label">When do you need us? *</span>
+                    <div class="tow-radios">
+                      <label class="tow-check"><input type="radio" name="when" value="asap" checked /> As soon as possible</label>
+                      <label class="tow-check"><input type="radio" name="when" value="scheduled" /> Schedule for later</label>
+                    </div>
+                  </div>
+                  <div class="tow-field" data-schedule hidden>
+                    <label for="tf-when">Preferred date and time</label>
+                    <input id="tf-when" name="scheduled_for" type="datetime-local" />
+                  </div>
+                  <div class="tow-field">
+                    <span class="tow-label">Anything we should know? (check all that apply)</span>
+                    <label class="tow-check"><input type="checkbox" name="conditions" value="stuck" /> Stuck (ditch, snow or mud)</label>
+                    <label class="tow-check"><input type="checkbox" name="conditions" value="collision" /> Collision</label>
+                    <label class="tow-check"><input type="checkbox" name="conditions" value="cannot-roll-steer" /> Wheels won’t roll or steering is damaged</label>
+                    <label class="tow-check"><input type="checkbox" name="conditions" value="no-keys" /> No keys available</label>
+                    <label class="tow-check"><input type="checkbox" name="conditions" value="tight-space" /> Low clearance or tight space (e.g., parkade)</label>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="tow-field">
+                <label for="tf-notes">Notes (optional)</label>
+                <textarea id="tf-notes" name="notes" rows="3" placeholder="Anything else that helps us get there prepared"></textarea>
+              </div>
+
+              <div class="tow-hp" aria-hidden="true">
+                <label>Leave this field empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+              </div>
+
+              <label class="tow-check tow-consent">
+                <input type="checkbox" name="consent" required />
+                <span>I agree to the <a href="/terms.html" target="_blank" rel="noopener">Terms</a> and <a href="/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>, and that KLN may call or text me about this request. *</span>
+              </label>
+
+              <p class="tow-error" role="alert" aria-live="assertive" hidden></p>
+              <button type="submit" class="cta-button tow-submit">Send Tow Request</button>
+              <p class="meta tow-fineprint">For the fastest dispatch, call <a href="tel:+12048996955"><strong>204-899-6955</strong></a>. Injury, fire or a hazard to traffic? Call <strong>911</strong> first.</p>
+            </form>
+
+            <div class="tow-success" hidden tabindex="-1">
+              <h3><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Request received</h3>
+              <p>Thanks — dispatch has your request and will call you shortly to confirm the details and your estimated arrival time.</p>
+              <p>Need help right away? Call <a href="tel:+12048996955"><strong>204-899-6955</strong></a>.</p>
+              <button type="button" class="cta-button tow-success__close" data-tow-close>Close</button>
+            </div>
+          </div>
+      </div>
+    </dialog>
+
+    <script src="/towing/config.js?v=20261117b"></script>
+    <script src="/towing/towing.js?v=20261117b"></script>
   </body>
 </html>
