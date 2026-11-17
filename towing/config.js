@@ -1,8 +1,8 @@
 /*
  * KLN Towing — online request form settings.
- * Leave "endpoint" empty until the KLN Dispatch receiving address is ready.
- * While it is empty, visitors see a "call us" message instead of the form.
+ * "endpoint" is the KLN Dispatch address that receives online requests.
+ * If it is ever left empty, visitors see a "call us" message instead of the form.
  */
 window.KLN_TOW_CONFIG = window.KLN_TOW_CONFIG || {
-  endpoint: "",
+  endpoint: "https://kln-dispatch.pages.dev/api/public/tow-request",
 };
